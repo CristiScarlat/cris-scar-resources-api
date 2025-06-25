@@ -11,7 +11,7 @@ const limiter = rateLimit({
 
 require('dotenv').config()
 const app = express();
-const PORT = 3000;
+const PORT: number = 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -46,6 +46,6 @@ app.get('/check', async (req: Request, res: Response) => {
 })
 
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   return console.log(`Express is listening at http://localhost:${PORT}`);
 });
