@@ -19,9 +19,9 @@ export const searchMealsByName = async (req, res) => {
 }
 
 export const searchMealsByIngredients = async (req, res) => {
-    const ingredient = req.body.ingredient;
-    if (ingredient) {
-        const response = await fetch(`${baseURL}/filter.php?i=${ingredient}`, {
+    const ingredients = req.body.ingredients;
+    if (ingredients) {
+        const response = await fetch(`${baseURL}/filter.php?i=${ingredients.join()}`, {
             headers: {
                 "Content-Type": "application/json",
                 'Cache-Control': 'cache'
