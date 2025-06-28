@@ -1,6 +1,8 @@
 import express, {Request, Response} from 'express';
+import cors from "cors";
 import { auth } from './lib/fb.js';
 import rateLimit from 'express-rate-limit';
+
 
 const limiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
@@ -13,6 +15,7 @@ require('dotenv').config()
 const app = express();
 const PORT: number = 3000;
 
+app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/', limiter);
@@ -29,7 +32,7 @@ app.use((req, res, next) => {
 
 const mealsWithDrinksRoutes = require('./routes/mealswithdrinks');
 
-app.use('/mealswithdrinks', mealsWithDrinksRoutes);
+app.use('/mealswithdrinks', cors(), mealsWithDrinksRoutes);
 
 app.get('/', (req, res) => {
   res.send('My api and file storage with firebase auth check!');
