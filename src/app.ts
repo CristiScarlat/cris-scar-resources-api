@@ -21,14 +21,14 @@ app.use(express.json());
 app.use('/', limiter);
 
 //Block simple bots and non-browser requests:
-app.use((req, res, next) => {
-  if(req.path === "/health-check")next();
-  const userAgent = req.get('User-Agent');
-  if (!userAgent || !userAgent.includes('Mozilla')) {
-    return res.status(403).json({ error: 'Bots not allowed' });
-  }
-  next();
-});
+// app.use((req, res, next) => {
+//   if(req.path === "/health-check")next();
+//   const userAgent = req.get('User-Agent');
+//   if (!userAgent || !userAgent.includes('Mozilla')) {
+//     return res.status(403).json({ error: 'Bots not allowed' });
+//   }
+//   next();
+// });
 
 const mealsWithDrinksRoutes = require('./routes/mealswithdrinks');
 
