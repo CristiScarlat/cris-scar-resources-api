@@ -38,9 +38,9 @@ app.use('/', limiter);
 //   }
 //   next();
 // });
-const mealsWithDrinksRoutes = require('./routes/mealswithdrinks');
-app.use('/mealswithdrinks', (0, cors_1.default)(), mealsWithDrinksRoutes);
-app.get('/', (req, res) => {
+const homeRoutes = require('./routes');
+app.use('/', (0, cors_1.default)(), homeRoutes);
+app.get('/about', (req, res) => {
     res.send('My api and file storage with firebase auth check!');
 });
 app.get('/health-check', (req, res) => {

@@ -30,11 +30,11 @@ app.use('/', limiter);
 //   next();
 // });
 
-const mealsWithDrinksRoutes = require('./routes/mealswithdrinks');
+const homeRoutes = require('./routes');
 
-app.use('/mealswithdrinks', cors(), mealsWithDrinksRoutes);
+app.use('/', cors(), homeRoutes);
 
-app.get('/', (req, res) => {
+app.get('/about', (req, res) => {
   res.send('My api and file storage with firebase auth check!');
 });
 
