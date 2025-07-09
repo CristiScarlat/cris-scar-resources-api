@@ -4,7 +4,7 @@
   "main": "dist/app.js",
   "scripts": {
     "dev": "tsc && cp -r src/db dist/ && nodemon dist/app.js",
-    "start": "tsc && node dist/app.js",
+    "start": "tsc && cp -r src/db dist/ && node dist/app.js",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
