@@ -29,9 +29,9 @@ const searchMealsByName = (req, res) => __awaiter(void 0, void 0, void 0, functi
 });
 exports.searchMealsByName = searchMealsByName;
 const searchMealsByIngredients = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const ingredient = req.body.ingredient;
-    if (ingredient) {
-        const response = yield fetch(`${baseURL}/filter.php?i=${ingredient}`, {
+    const ingredients = req.body.ingredients;
+    if (ingredients) {
+        const response = yield fetch(`${baseURL}/filter.php?i=${ingredients.join()}`, {
             headers: {
                 "Content-Type": "application/json",
                 'Cache-Control': 'cache'

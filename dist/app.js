@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const cors_1 = __importDefault(require("cors"));
 const fb_js_1 = require("./lib/fb.js");
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const limiter = (0, express_rate_limit_1.default)({
@@ -24,21 +25,26 @@ const limiter = (0, express_rate_limit_1.default)({
 require('dotenv').config();
 const app = (0, express_1.default)();
 const PORT = 3000;
+app.use((0, cors_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
 app.use('/', limiter);
 //Block simple bots and non-browser requests:
-app.use((req, res, next) => {
-    const userAgent = req.get('User-Agent');
-    if (!userAgent || !userAgent.includes('Mozilla')) {
-        return res.status(403).json({ error: 'Bots not allowed' });
-    }
-    next();
-});
+// app.use((req, res, next) => {
+//   if(req.path === "/health-check")next();
+//   const userAgent = req.get('User-Agent');
+//   if (!userAgent || !userAgent.includes('Mozilla')) {
+//     return res.status(403).json({ error: 'Bots not allowed' });
+//   }
+//   next();
+// });
 const mealsWithDrinksRoutes = require('./routes/mealswithdrinks');
-app.use('/mealswithdrinks', mealsWithDrinksRoutes);
+app.use('/mealswithdrinks', (0, cors_1.default)(), mealsWithDrinksRoutes);
 app.get('/', (req, res) => {
     res.send('My api and file storage with firebase auth check!');
+});
+app.get('/health-check', (req, res) => {
+    res.send('ok');
 });
 app.get('/check', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
